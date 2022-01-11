@@ -1,0 +1,67 @@
+﻿@model LoanAmortization.Models.LoanViewModel
+
+@{
+    ViewData["Title"] = "Loan amortization table";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Loan amortization table</h1>
+    <p>To check loan amortization table, fill fields below</p>
+</div>
+
+<h2>Loan parameters</h2>
+<div>
+    <form asp-action="GetAmortizationTable" id="form" data-ajax="true" data-ajax-method="post" data-ajax-update="#test">
+        @Html.AntiForgeryToken()
+      
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="InitialPrincipalBalance" class="custom-control-label"></label>
+            <input asp-for="InitialPrincipalBalance" class="form-control" />
+            <span asp-validation-for="InitialPrincipalBalance" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="AnnualInterestRate" class="custom-control-label"></label>
+            <input asp-for="AnnualInterestRate" class="form-control" />
+            <span asp-validation-for="AnnualInterestRate" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="LoanLength" class="custom-control-label"></label>
+            <input asp-for="LoanLength" class="form-control" />
+            <span asp-validation-for="LoanLength" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="InceptionDate" class="custom-control-label"></label>
+            <input asp-for="InceptionDate" class="form-control" />
+            <span asp-validation-for="InceptionDate" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" id="btnSubmit" value="Calculate" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
+
+<div id="test">
+
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+<script src="~/lib/jquery-nobtrusive-ajax/jquery.unobtrusive-ajax.min.js"></script>
+<script>
+    $('#btnSubmit').click(function (event) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        $('#form').submit();
+
+        $.ajax({
+            url: 'url',
+            dataType: 'html',
+            success: function (data) {
+                $('#test').html(data);
+            }
+        });
+    });
+</script>
+}

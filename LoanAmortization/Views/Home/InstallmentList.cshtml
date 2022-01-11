@@ -1,0 +1,49 @@
+﻿@model IEnumerable<InstallmentViewModel>
+@{
+
+}
+
+<h2>Amortization table</h2>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(x => x.PaymentNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(x => x.PaymentDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(x => x.InterestPortion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(x => x.PrincipalPortion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(x => x.PrincipalBalanceLeft)
+        </th>
+    </tr>
+
+    @if (Model != null)
+    {
+        foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PaymentNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PaymentDate)
+            </td>
+            <td>
+                $@Html.DisplayFor(modelItem => item.InterestPortion)
+            </td>
+            <td>
+                $@Html.DisplayFor(modelItem => item.PrincipalPortion)
+            </td>
+            <td>
+                $@Html.DisplayFor(modelItem => item.PrincipalBalanceLeft)
+            </td>
+        </tr>
+        }
+    }
+</table>
