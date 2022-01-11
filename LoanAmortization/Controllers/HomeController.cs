@@ -50,7 +50,6 @@ namespace LoanAmortization.Controllers
             }
             if((lvm.LoanLength / 12m * 52m) % 1 != 0)
             {
-                decimal partOfWeek = ((lvm.LoanLength / 12m * 52m) % 1);
                 decimal interestPortion = interestRate * balance;
 
                 installments.Add(new InstallmentViewModel()
@@ -69,7 +68,6 @@ namespace LoanAmortization.Controllers
 
         private decimal GetWeklyPayment(LoanViewModel lvm, decimal i, decimal avgWeekLenght)
         {
-            //decimal i = (lvm.AnnualInterestRate / 100.00m) / 365m * avgWeekLenght;
             decimal p = lvm.InitialPrincipalBalance;
             decimal n = ((lvm.LoanLength / 12m) * 52m);
 
